@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>world.xuewei</groupId>
+        <artifactId>xw-fast-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>xw-fast-web</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <Automatic-Module-Name>world.xuewei.fast.web</Automatic-Module-Name>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>world.xuewei</groupId>
+            <artifactId>xw-fast-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
+</project>

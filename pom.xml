@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>world.xuewei</groupId>
+    <artifactId>xw-fast-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>xw-fast</name>
+    <description>
+      Xw-Fast 是一个专为 Java Web 开发的针对 Spring 系列框架封装的便捷开发脚手架，旨在降低框架的学习使用成本，提高工作效率，大大提升 Web 开发效率。
+    </description>
+    <url>https://github.com/373675032/xw-fast</url>
+    <modules>
+        <module>xw-fast-core</module>
+        <module>xw-fast-web</module>
+        <module>xw-fast-crud</module>
+        <module>xw-fast-all</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+
+        <Automatic-Module-Name>world.xuewei.fast</Automatic-Module-Name>
+
+        <!-- versions -->
+        <compile.version>8</compile.version>
+        <junit.version>5.9.2</junit.version>
+        <lombok.version>1.18.26</lombok.version>
+        <hutool.version>5.7.17</hutool.version>
+        <boot.version>2.7.17</boot.version>
+        <fastjson.version>1.2.47</fastjson.version>
+    </properties>
+
+    <dependencies>
+        <!-- 全局单元测试 -->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>${boot.version}</version>
+        </dependency>
+    </dependencies>
+</project>
