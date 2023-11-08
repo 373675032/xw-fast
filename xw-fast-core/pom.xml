@@ -10,6 +10,9 @@
     <artifactId>xw-fast-core</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
+    <description>
+        核心，包括的各种工具类、异常定义等
+    </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -10,6 +10,9 @@
     <artifactId>xw-fast-crud</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
+    <description>
+        封装基础增删查改的基础接口、基础实体的封装
+    </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

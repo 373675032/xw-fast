@@ -8,7 +8,8 @@
     <packaging>pom</packaging>
     <name>xw-fast</name>
     <description>
-      Xw-Fast 是一个专为 Java Web 开发的针对 Spring 系列框架封装的便捷开发脚手架，旨在降低框架的学习使用成本，提高工作效率，大大提升 Web 开发效率。
+        XwFast 是专为 Java Web 开发的基于 Spring 系列框架封装的黑科技脚手架，通过诸多实用工具类/组件的使用，旨在帮助开发者快速、便捷地完成各类开发任务。
+        这些封装的工具组件涵盖了基础增删查改接口、邮件客户端、短信客户端、等一系列操作，可以满足各种不同的开发需求。
     </description>
     <modules>
         <module>xw-fast-core</module>
