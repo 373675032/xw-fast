@@ -1,3 +1,4 @@
+---
 <p align="center">
 	<img src="https://xuewei-blog.oss-cn-beijing.aliyuncs.com/202311081738321.png" style="zoom:50%;" />
 </p>
