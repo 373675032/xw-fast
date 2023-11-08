@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 /**
  * 基础增删查改控制器
+ *
+ * @author XUEW
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
