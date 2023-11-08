@@ -13,4 +13,14 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FastController {
+
+    /**
+     * 包含的方法
+     */
+    String[] includeMethods() default {};
+
+    /**
+     * 排除的方法
+     */
+    String[] excludeMethods() default {};
 }
