@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import world.xuewei.fast.core.exception.BusinessRunTimeException;
 import world.xuewei.fast.core.util.Assert;
 import world.xuewei.fast.crud.dto.request.ReqBody;
@@ -37,6 +38,7 @@ public class BaseController<T> {
      * @return 实体对象
      */
     @RequestMapping("/saveData")
+    @ResponseBody
     public RespResult saveData(@RequestBody ReqBody<T> reqBody) {
         T t = reqBody.getObj();
         Assert.assertNotEmpty(t, "实体[obj]");
@@ -51,6 +53,7 @@ public class BaseController<T> {
      * @return 实体对象列表
      */
     @RequestMapping("/saveBatchData")
+    @ResponseBody
     public RespResult saveBatchData(@RequestBody ReqBody<T> reqBody) {
         List<T> objs = reqBody.getObjs();
         Assert.assertNotEmpty(objs, "实体数组[objs]");
@@ -65,6 +68,7 @@ public class BaseController<T> {
      * @return 删除条数
      */
     @RequestMapping("/delete")
+    @ResponseBody
     public RespResult delete(@RequestBody ReqBody<T> reqBody) {
         Assert.assertNotEmpty(reqBody, "ID[id]");
         Serializable id = reqBody.getId();
@@ -83,6 +87,7 @@ public class BaseController<T> {
      * @return 删除条数
      */
     @RequestMapping("/deleteBatch")
+    @ResponseBody
     public RespResult deleteBatch(@RequestBody ReqBody<T> reqBody) {
         Assert.assertNotEmpty(reqBody, "ID数组[ids]");
         List<Serializable> ids = reqBody.getIds();
@@ -101,6 +106,7 @@ public class BaseController<T> {
      * @return 删除条数
      */
     @RequestMapping("/deleteByField")
+    @ResponseBody
     public RespResult deleteByField(@RequestBody ReqBody<T> reqBody) {
         String field = reqBody.getField();
         Object value = reqBody.getValue();
@@ -120,6 +126,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/deleteBatchByField")
+    @ResponseBody
     public RespResult deleteBatchByField(@RequestBody ReqBody<T> reqBody) {
         String field = reqBody.getField();
         List<Object> values = reqBody.getValues();
@@ -139,6 +146,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/getById")
+    @ResponseBody
     public RespResult getById(@RequestBody ReqBody<T> reqBody) {
         Serializable id = reqBody.getId();
         Assert.assertNotEmpty(id, "ID[id]");
@@ -156,6 +164,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/getByIds")
+    @ResponseBody
     public RespResult getByIds(@RequestBody ReqBody<T> reqBody) {
         List<Serializable> ids = reqBody.getIds();
         Assert.assertNotEmpty(ids, "ID数组[ids]");
@@ -170,6 +179,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/getByObj")
+    @ResponseBody
     public RespResult getByObj(@RequestBody ReqBody<T> reqBody) {
         T obj = reqBody.getObj();
         Assert.assertNotEmpty(obj, "实体[obj]");
@@ -184,6 +194,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/getByField")
+    @ResponseBody
     public RespResult getByField(@RequestBody ReqBody<T> reqBody) {
         String field = reqBody.getField();
         Object value = reqBody.getValue();
@@ -200,6 +211,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/getBatchByField")
+    @ResponseBody
     public RespResult getBatchByField(@RequestBody ReqBody<T> reqBody) {
         String field = reqBody.getField();
         List<Object> values = reqBody.getValues();
@@ -215,6 +227,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/getAll")
+    @ResponseBody
     public RespResult getAll() {
         List<T> list = baseService.getAll();
         return RespResult.success("查询成功", list);
@@ -227,6 +240,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/customQuery")
+    @ResponseBody
     public RespResult customQuery(@RequestBody ReqBody<T> reqBody) {
         QueryBody<T> queryBody = reqBody.getQueryBody();
         Assert.assertNotEmpty(queryBody, "查询策略[queryBody]");
@@ -255,6 +269,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/countByObj")
+    @ResponseBody
     public RespResult countByObj(@RequestBody ReqBody<T> reqBody) {
         T obj = reqBody.getObj();
         Assert.assertNotEmpty(obj, "实体[obj]");
@@ -269,6 +284,7 @@ public class BaseController<T> {
      * @return 出参
      */
     @RequestMapping("/countByField")
+    @ResponseBody
     public RespResult countByField(@RequestBody ReqBody<T> reqBody) {
         String field = reqBody.getField();
         Object value = reqBody.getValue();
