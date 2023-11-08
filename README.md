@@ -1,8 +1,11 @@
 <img src="https://xuewei-blog.oss-cn-beijing.aliyuncs.com/202311081738321.png" style="zoom:50%;" />
 
-<center>🚀 A Cutting-edge Tool For Rapid Java Web development.</center>
-
-<center>👉 <a href="http://fast.xuewei.world/" target="_blank">http://fast.xuewei.world/ 👈</center>
+<p align="center">
+	<strong>🚀 A Cutting-edge Tool For Rapid Java Web Development.</strong>
+</p>
+<p align="center">
+	👉 <a href="http://fast.xuewei.world/" target="_blank">http://xuewei.world </a>👈
+</p>
 
 <p align="center">
 	<a target="_blank" href="https://central.sonatype.com/artifact/world.xuewei/xw-fast-all">
