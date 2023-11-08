@@ -4,7 +4,7 @@
 	<strong>🚀 A Cutting-edge Tool For Rapid Java Web Development.</strong>
 </p>
 <p align="center">
-	👉 <a href="http://fast.xuewei.world/" target="_blank">http://xuewei.world </a>👈
+	👉 <a href="http://xuewei.world/" target="_blank">http://xuewei.world </a>👈
 </p>
 
 <p align="center">
