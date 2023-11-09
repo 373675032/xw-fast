@@ -10,7 +10,7 @@ import java.util.Map;
  * @author XUEW
  * @since 2023/11/7 18:37
  */
-public class BeanUtil {
+public class BeanUtils {
 
     /**
      * 将对象转为 Map

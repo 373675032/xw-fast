@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  *
  * @author XUEW
  */
-public class VariableNameUtil {
+public class VariableNameUtils {
 
     private static final Pattern linePattern = Pattern.compile("_(\\w)");
     private static final Pattern humpPattern = Pattern.compile("[A-Z]");

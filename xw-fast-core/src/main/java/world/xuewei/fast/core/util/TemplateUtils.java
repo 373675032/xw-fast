@@ -14,7 +14,7 @@ import static world.xuewei.fast.core.constant.DefaultEmailTemplate.DEFAULT_TEMPL
  * @author XUEW
  * @since 2023/11/1 16:33
  */
-public class TemplateProvider {
+public class TemplateUtils {
 
 
     /**
@@ -23,7 +23,7 @@ public class TemplateProvider {
      * @param fileName 文件名称（不包含扩展名）
      * @return 内容字符串
      */
-    public static String provide(String fileName) {
+    public static String readTemplateFile(String fileName) {
         String target = String.format("email-templates/%s.html", fileName);
         StringBuilder stringBuilder = new StringBuilder();
         try (Scanner scanner = new Scanner(new ClassPathResource(target).getInputStream(), StandardCharsets.UTF_8.name())) {

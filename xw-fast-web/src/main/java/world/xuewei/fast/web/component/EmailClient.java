@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import world.xuewei.fast.core.util.TemplateProvider;
+import world.xuewei.fast.core.util.TemplateUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -76,7 +76,7 @@ public class EmailClient {
      * @throws MessagingException 邮件发送异常
      */
     public void sendCode(String targetEmail, String code) throws MessagingException {
-        String codeTemplate = TemplateProvider.provide("code");
+        String codeTemplate = TemplateUtils.readTemplateFile("code");
         codeTemplate = codeTemplate.replace("{CODE}", code);
         codeTemplate = codeTemplate.replace("{VALID_MINUTES}", String.valueOf(validMinutes));
         codeTemplate = codeTemplate.replace("{APP_NAME}", appInfo.getCnName());

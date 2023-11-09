@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @author XUEW
  */
-public class JwtUtil {
+public class JwtUtils {
 
     /**
      * 密钥
