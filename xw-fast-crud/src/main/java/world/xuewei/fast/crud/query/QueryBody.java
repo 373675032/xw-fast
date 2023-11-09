@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import world.xuewei.fast.core.exception.BusinessRunTimeException;
 import world.xuewei.fast.core.util.Assert;
-import world.xuewei.fast.core.util.VariableNameUtil;
+import world.xuewei.fast.core.util.VariableNameUtils;
 
 
 import java.util.List;
@@ -86,19 +86,19 @@ public class QueryBody<T> {
         if (Assert.notEmpty(keywordFields) && Assert.notEmpty(keyword)) {
             wrapper.and(orWrapper -> {
                 for (String keywordField : keywordFields) {
-                    orWrapper.like(VariableNameUtil.humpToLine(keywordField), keyword).or();
+                    orWrapper.like(VariableNameUtils.humpToLine(keywordField), keyword).or();
                 }
             });
         }
         // 指定查询字段
         if (Assert.notEmpty(includeFields)) {
-            String[] array = includeFields.stream().map(VariableNameUtil::humpToLine).collect(Collectors.toList()).toArray(new String[]{});
+            String[] array = includeFields.stream().map(VariableNameUtils::humpToLine).collect(Collectors.toList()).toArray(new String[]{});
             wrapper.select(array);
         }
         // 查询条件
         if (Assert.notEmpty(conditions)) {
             for (QueryCondition condition : conditions) {
-                String field = VariableNameUtil.humpToLine(condition.getField());
+                String field = VariableNameUtils.humpToLine(condition.getField());
                 String type = condition.getType();
                 Object value = condition.getValue();
                 if ("ALL_DATA".equals(value)) {
@@ -185,7 +185,7 @@ public class QueryBody<T> {
         // 排序
         if (Assert.notEmpty(orderBy)) {
             for (QueryOrder queryOrder : orderBy) {
-                String field = VariableNameUtil.humpToLine(queryOrder.getField());
+                String field = VariableNameUtils.humpToLine(queryOrder.getField());
                 String type = queryOrder.getType().toLowerCase();
                 switch (type) {
                     case "asc":

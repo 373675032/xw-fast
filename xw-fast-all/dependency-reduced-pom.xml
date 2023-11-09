@@ -8,6 +8,8 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>xw-fast-all</artifactId>
   <name>${project.artifactId}</name>
+  <description>XwFast 是专为 Java Web 开发的基于 Spring 系列框架封装的黑科技脚手架，通过诸多实用工具类/组件的使用，旨在帮助开发者快速、便捷地完成各类开发任务。
+        这些封装的工具组件涵盖了基础增删查改接口、邮件客户端、短信客户端、等一系列操作，可以满足各种不同的开发需求。</description>
   <build>
     <plugins>
       <plugin>

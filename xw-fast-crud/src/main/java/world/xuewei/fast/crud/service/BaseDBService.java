@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 import world.xuewei.fast.core.util.Assert;
-import world.xuewei.fast.core.util.BeanUtil;
-import world.xuewei.fast.core.util.VariableNameUtil;
+import world.xuewei.fast.core.util.BeanUtils;
+import world.xuewei.fast.core.util.VariableNameUtils;
 
 import java.io.Serializable;
 import java.util.*;
@@ -161,7 +161,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
         if (Assert.isEmpty(obj)) {
             return getAll();
         }
-        Map<String, Object> bean2Map = BeanUtil.beanToMap(obj);
+        Map<String, Object> bean2Map = BeanUtils.beanToMap(obj);
         return getByMap(bean2Map);
     }
 
@@ -172,7 +172,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
             if (Assert.isEmpty(map.get(key))) {
                 continue;
             }
-            newMap.put(VariableNameUtil.humpToLine(key), map.get(key));
+            newMap.put(VariableNameUtils.humpToLine(key), map.get(key));
         }
         return mapper.selectByMap(newMap);
     }
@@ -194,7 +194,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
 
     @Override
     public int countByObj(T obj) {
-        return this.countByMap(BeanUtil.beanToMap(obj));
+        return this.countByMap(BeanUtils.beanToMap(obj));
     }
 
     @Override
@@ -209,7 +209,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
 
     @Override
     public IPage<T> getByObjPage(T obj, IPage<T> page) {
-        return this.getByMapPage(BeanUtil.beanToMap(obj), page);
+        return this.getByMapPage(BeanUtils.beanToMap(obj), page);
     }
 
     @Override
@@ -230,7 +230,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
             if (Assert.isEmpty(temp.getValue())) {
                 continue;
             }
-            wrapper.eq(VariableNameUtil.humpToLine(key), map.get(key));
+            wrapper.eq(VariableNameUtils.humpToLine(key), map.get(key));
         }
         return wrapper;
     }
