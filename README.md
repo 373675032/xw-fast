@@ -6,7 +6,7 @@
 	<strong>🚀 A Cutting-edge Tool For Rapid Java Web Development.</strong>
 </p>
 <p align="center">
-	👉 <a href="http://xuewei.world/" target="_blank">http://xuewei.world </a>👈
+	👉 <a href="http://fast.xuewei.world/" target="_blank">http://xuewei.world </a>👈
 </p>
 
 <p align="center">
@@ -32,12 +32,12 @@
 
 ---
 
-## 📚简介
+## 🚀简介
 
 XwFast 是专为 Java Web 开发的基于 Spring
 系列框架封装的黑科技脚手架，通过诸多实用工具类/组件的使用，旨在帮助开发者快速、便捷地完成各类开发任务。这些封装的工具组件涵盖了基础增删查改接口、邮件客户端、短信客户端、等一系列操作，可以满足各种不同的开发需求。
 
-## 🍺理念
+## ❤️理念
 
 XwFast 旨在解放程序员生产力，用最少的代码做最多的事，将您的宝贵时间放在复杂业务和提升自我上，简单的事就交给 XwFast 吧！
 
@@ -76,12 +76,172 @@ XwFast
 
 ## 📝文档
 
-- 中文文档：作者正在紧锣密鼓的撰写，敬请期待。
-- 英文文档：作者正在紧锣密鼓的撰写，敬请期待。
+### 快速开始
+
+创建一个基础的 SpringBoot 项目，引入下面依赖：
+
+```xml
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>2.7.17</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.7.17</version>
+    </dependency>
+
+    <!-- MyBatis Plus -->
+    <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>3.2.0</version>
+    </dependency>
+
+    <!-- MySQL -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <scope>runtime</scope>
+        <version>5.1.48</version>
+    </dependency>
+
+    <!-- Druid -->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.2.8</version>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>1.2.8</version>
+    </dependency>
+
+    <!-- 引入 Xw-Fast -->
+    <dependency>
+        <groupId>world.xuewei</groupId>
+        <artifactId>xw-fast-all</artifactId>
+        <version>1.0.2</version>
+    </dependency>
+
+</dependencies>
+```
+
+在 SpringBoot 配置文件中正常配置数据源等信息，之后创建基础目录结构，如下（也可按照自己的想法自行设计）：
+
+#### controller
+
+控制器包，编写控制器时继承 XwFast 封装的 BaseController，传入绑定的实体泛型。也可以在当前控制器类上声明注解
+@FastController，XwFast 会自动注册这些增删查改接口。
+
+点击链接查看接口示例
+👉 [基础增删查改接口示例 - XwFast](https://apifox.com/apidoc/shared-c29aa917-b35f-4886-9a32-370a72de349d)
+
+```java
+
+@RestController
+@RequestMapping("/Example")
+public class ExampleController extends BaseController<Example> {
+
+    public ExampleController(ExampleService service) {
+        super(service);
+    }
+
+    // Write Your Code Here ...
+}
+```
+
+```java
+
+@RestController
+@FastController
+@RequestMapping("/Example")
+public class ExampleController {
+
+    @Autowired
+    private ExampleService service;
+
+    // Write Your Code Here ...
+}
+```
+
+#### service
+
+业务实现层，编写服务时继承 XwFast 封装的 BaseDBService，里面像 MyBatisPlus 一样封装了增删查改的接口，如果想问区别的话，那么我只能说
+XwFast 更全面！
+
+```java
+
+@Service
+public class ExampleService extends BaseDBService<Example> {
+
+    public ExampleService(ExampleMapper mapper) {
+        super(mapper);
+    }
+
+    // Write Your Code Here ...
+}
+```
+
+#### mapper
+
+数据库访问层，和 Dao 是同一个意思，这里你可以直接继承自 MyBatisPlus 的 BaseMapper 类，传入实泛型。
+
+```java
+
+@Mapper
+public interface ExampleMapper extends BaseMapper<Example> {
+
+    // Write Your Code Here ...
+}
+```
+
+#### entity
+
+数据库实体包，编写实体时继承 XwFast 封装的 BaseEntity，涉及到一些数据库的基础字段。
+
+```java
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("example")
+@EqualsAndHashCode(callSuper = true)
+public class Example extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 541179640568881082L;
+
+    /**
+     * 编码
+     */
+    private String code;
+
+    /**
+     * 名称
+     */
+    private String name;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+}
+```
+
+> 以上步骤昨晚之后那么恭喜你，运行服务就可以打开 Postman、Apifox 等接口测试工具测试了！
+>
+>
+接口文档可查看示例：[基础增删查改接口示例 - XwFast](https://apifox.com/apidoc/shared-c29aa917-b35f-4886-9a32-370a72de349d)
 
 ## 🏗️添砖加瓦
 
-### 🎋分支说明
+### 🌵分支说明
 
 XwFast 的源码分为两个分支，功能如下：
 
@@ -96,7 +256,7 @@ XwFast 的源码分为两个分支，功能如下：
 
 [Issues · XwFast](https://github.com/373675032/xw-fast/issues)
 
-### 🧬贡献代码的步骤
+### 💡贡献代码的步骤
 
 1. 在 Github 上 fork 项目到自己的 repo
 2. 把 fork 过去的项目也就是你的项目 clone 到你的本地
