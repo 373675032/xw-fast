@@ -65,7 +65,7 @@ XwFast
 <dependency>
     <groupId>world.xuewei</groupId>
     <artifactId>xw-fast-all</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
