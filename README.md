@@ -131,6 +131,19 @@ XwFast
 </dependencies>
 ```
 
+将 XwFast 的组件配置给 SpringBoot 扫描：
+
+```java
+@ComponentScan(value = {"world.xuewei.fast", "你自己的项目包路径"})
+@SpringBootApplication
+public class XwFastDemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(XwFastDemoApplication.class, args);
+    }
+}
+```
+
 在 SpringBoot 配置文件中正常配置数据源等信息，之后创建基础目录结构，如下（也可按照自己的想法自行设计）：
 
 #### controller
@@ -236,8 +249,15 @@ public class Example extends BaseEntity implements Serializable {
 
 > 以上步骤昨晚之后那么恭喜你，运行服务就可以打开 Postman、Apifox 等接口测试工具测试了！
 >
+> 接口文档可查看示例：[基础增删查改接口示例 - XwFast](https://apifox.com/apidoc/shared-c29aa917-b35f-4886-9a32-370a72de349d)
+
+> 如果你觉得创建、编写上面的几个类文件麻烦的话，XwFast 也帮你想了办法，你可以下载一个名为 EasyCode 的 IDEA 插件，这个插件可以帮你一键生成对应的实体、服务、DAO、Controller 等。但是你需要将 XwFast 提供的代码模板导入到你的 IDEA 配置。
 >
-接口文档可查看示例：[基础增删查改接口示例 - XwFast](https://apifox.com/apidoc/shared-c29aa917-b35f-4886-9a32-370a72de349d)
+> ![](https://xuewei-blog.oss-cn-beijing.aliyuncs.com/202311091230970.png)
+>
+> **可关注我的公众号：【薛伟同学】，后台回复【XwFast模板】获取代码模板。**
+>
+> [【B站 - EasyCode使用教学视频 - 薛伟同学】](https://www.bilibili.com/video/BV1f7411R7se/)
 
 ## 🏗️添砖加瓦
 
