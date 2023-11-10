@@ -65,7 +65,7 @@ XwFast
 <dependency>
     <groupId>world.xuewei</groupId>
     <artifactId>xw-fast-all</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -125,7 +125,7 @@ XwFast
     <dependency>
         <groupId>world.xuewei</groupId>
         <artifactId>xw-fast-all</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4-SNAPSHOT</version>
     </dependency>
 
 </dependencies>
@@ -134,6 +134,7 @@ XwFast
 将 XwFast 的组件配置给 SpringBoot 扫描：
 
 ```java
+
 @ComponentScan(value = {"world.xuewei.fast", "你自己的项目包路径"})
 @SpringBootApplication
 public class XwFastDemoApplication {
@@ -249,9 +250,11 @@ public class Example extends BaseEntity implements Serializable {
 
 > 以上步骤做完之后那么恭喜你，运行服务就可以打开 Postman、Apifox 等接口测试工具测试了！
 >
-> 接口文档可查看示例：[基础增删查改接口示例 - XwFast](https://apifox.com/apidoc/shared-c29aa917-b35f-4886-9a32-370a72de349d)
+>
+接口文档可查看示例：[基础增删查改接口示例 - XwFast](https://apifox.com/apidoc/shared-c29aa917-b35f-4886-9a32-370a72de349d)
 
-> 如果你觉得创建、编写上面的几个类文件麻烦的话，XwFast 也帮你想了办法，你可以下载一个名为 EasyCode 的 IDEA 插件，这个插件可以帮你一键生成对应的实体、服务、DAO、Controller 等。但是你需要将 XwFast 提供的代码模板导入到你的 IDEA 配置。
+> 如果你觉得创建、编写上面的几个类文件麻烦的话，XwFast 也帮你想了办法，你可以下载一个名为 EasyCode 的 IDEA
+> 插件，这个插件可以帮你一键生成对应的实体、服务、DAO、Controller 等。但是你需要将 XwFast 提供的代码模板导入到你的 IDEA 配置。
 >
 > ![](https://xuewei-blog.oss-cn-beijing.aliyuncs.com/202311091230970.png)
 >
@@ -265,10 +268,10 @@ public class Example extends BaseEntity implements Serializable {
 
 XwFast 的源码分为两个分支，功能如下：
 
-| 分支   | 说明                                              |
-|------|-------------------------------------------------|
-| main | 主分支，release 版本使用的分支，与中央库提交的 jar 一致，不接收任何 pr 或修改 |
-| dev  | 开发分支，默认为下个版本的 SNAPSHOT 版本，接受修改或 pr              |
+| 分支   | 说明                                                 |
+|------|----------------------------------------------------|
+| main | 🚩 主分支，release 版本使用的分支，与中央库提交的 jar 一致，不接收任何 pr 或修改 |
+| dev  | 🏴 开发分支，默认为下个版本的 SNAPSHOT 版本，接受修改或 pr              |
 
 ### 🐞提供bug反馈或建议
 
