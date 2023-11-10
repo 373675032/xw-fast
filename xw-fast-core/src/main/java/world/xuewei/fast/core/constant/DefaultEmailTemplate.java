@@ -1,4 +1,4 @@
-package world.xuewei.fast.web.constant;
+package world.xuewei.fast.core.constant;
 
 import java.util.HashMap;
 import java.util.Map;
