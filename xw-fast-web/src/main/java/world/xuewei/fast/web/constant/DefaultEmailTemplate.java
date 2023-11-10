@@ -1,4 +1,4 @@
-package world.xuewei.fast.core.constant;
+package world.xuewei.fast.web.constant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,6 @@ public class DefaultEmailTemplate {
     public static final Map<String, String> DEFAULT_TEMPLATES = new HashMap<>();
 
     static {
-        DEFAULT_TEMPLATES.put("code", "您好，您的验证码为：{CODE}");
+        DEFAULT_TEMPLATES.put("code", "您好，您的验证码为：{CODE}，{VALID_MINUTES} 分钟有效。");
     }
 }

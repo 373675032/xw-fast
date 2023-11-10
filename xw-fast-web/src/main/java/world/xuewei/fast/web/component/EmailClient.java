@@ -1,6 +1,7 @@
 package world.xuewei.fast.web.component;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -40,12 +41,13 @@ public class EmailClient {
     /**
      * 验证码有效分钟数
      */
-    public Integer validMinutes = 5;
+    @Value("${spring.mail.valid-minutes:5}")
+    public Integer validMinutes;
 
     /**
      * 构造器注入
      */
-    public EmailClient(JavaMailSenderImpl javaMailSender, AppInfo appInfo) {
+    public EmailClient(@Autowired(required = false) JavaMailSenderImpl javaMailSender, AppInfo appInfo) {
         this.mailSender = javaMailSender;
         this.appInfo = appInfo;
     }
