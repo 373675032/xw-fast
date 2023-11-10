@@ -247,7 +247,7 @@ public class Example extends BaseEntity implements Serializable {
 }
 ```
 
-> 以上步骤昨晚之后那么恭喜你，运行服务就可以打开 Postman、Apifox 等接口测试工具测试了！
+> 以上步骤做完之后那么恭喜你，运行服务就可以打开 Postman、Apifox 等接口测试工具测试了！
 >
 > 接口文档可查看示例：[基础增删查改接口示例 - XwFast](https://apifox.com/apidoc/shared-c29aa917-b35f-4886-9a32-370a72de349d)
 
