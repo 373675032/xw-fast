@@ -17,12 +17,12 @@ public class AppInfo {
     /**
      * 应用中文名称
      */
-    @Value("${app.cn-name}")
+    @Value("${app.cn-name:Xw-Fast}")
     private String cnName;
 
     /**
      * 应用英文名称
      */
-    @Value("${app.en-name}")
+    @Value("${app.en-name:Xw-Fast}")
     private String enName;
 }

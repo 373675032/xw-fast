@@ -29,7 +29,7 @@ public class EmailClient {
     /**
      * 发件人标题
      */
-    @Value("${spring.mail.title}")
+    @Value("${spring.mail.title:Xw-Fast}")
     private String title = "";
 
     /**
