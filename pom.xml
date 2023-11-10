@@ -4,7 +4,7 @@
 
     <groupId>world.xuewei</groupId>
     <artifactId>xw-fast-parent</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <packaging>pom</packaging>
     <name>xw-fast</name>
     <description>
