@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://xuewei-blog.oss-cn-beijing.aliyuncs.com/202311081738321.png" style="zoom:50%;" />
+	<img src="https://xuewei-blog.oss-cn-beijing.aliyuncs.com/202311081738321.png" style="height:200px" />
 </p>
 <p align="center">
 	<strong>🚀 A Cutting-edge Tool For Rapid Java Web Development.</strong>
@@ -7,6 +7,7 @@
 <p align="center">
 	👉 <a href="http://fast.xuewei.world/" target="_blank">http://xuewei.world </a>👈
 </p>
+
 
 
 <p align="center">
