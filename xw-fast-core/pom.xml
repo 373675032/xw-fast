@@ -4,7 +4,7 @@
     <parent>
         <groupId>world.xuewei</groupId>
         <artifactId>xw-fast-parent</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.6</version>
     </parent>
 
     <artifactId>xw-fast-core</artifactId>
@@ -18,17 +18,5 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <Automatic-Module-Name>world.xuewei.fast.core</Automatic-Module-Name>
 
-        <jwt.version>3.4.0</jwt.version>
     </properties>
-
-    <dependencies>
-        <!-- JWT -->
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-            <version>${jwt.version}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
 </project>

@@ -3,7 +3,7 @@
   <parent>
     <artifactId>xw-fast-parent</artifactId>
     <groupId>world.xuewei</groupId>
-    <version>1.0.4</version>
+    <version>1.0.6</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>xw-fast-all</artifactId>
@@ -86,6 +86,31 @@
       <artifactId>spring-boot-starter-mail</artifactId>
       <version>2.7.17</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.8.16</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>3.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-extension</artifactId>
+      <version>3.4.3.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.4.0</version>
+      <scope>compile</scope>
+      <optional>true</optional>
     </dependency>
   </dependencies>
   <properties>

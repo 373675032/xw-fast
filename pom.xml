@@ -4,7 +4,7 @@
 
     <groupId>world.xuewei</groupId>
     <artifactId>xw-fast-parent</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.6</version>
     <packaging>pom</packaging>
     <name>xw-fast</name>
     <description>
@@ -31,6 +31,10 @@
         <hutool.version>5.7.17</hutool.version>
         <boot.version>2.7.17</boot.version>
         <fastjson.version>1.2.47</fastjson.version>
+        <hutool.version>5.8.16</hutool.version>
+        <mybatisplus.version>3.2.0</mybatisplus.version>
+        <mybatisplus-extension.version>3.4.3.1</mybatisplus-extension.version>
+        <jwt.version>3.4.0</jwt.version>
 
     </properties>
 
@@ -43,6 +47,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -50,22 +55,50 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- SpringBoot 相关 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>${boot.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${boot.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>${boot.version}</version>
+        </dependency>
+
+        <!-- HuTool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
+        <!-- MyBatisPlus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatisplus.version}</version>
+        </dependency>
+        <!-- MyBatisPlus 插件 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>${mybatisplus-extension.version}</version>
+        </dependency>
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${jwt.version}</version>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

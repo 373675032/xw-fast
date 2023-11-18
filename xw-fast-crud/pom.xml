@@ -4,7 +4,7 @@
     <parent>
         <groupId>world.xuewei</groupId>
         <artifactId>xw-fast-parent</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.6</version>
     </parent>
 
     <artifactId>xw-fast-crud</artifactId>
@@ -18,7 +18,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <Automatic-Module-Name>world.xuewei.fast.crud</Automatic-Module-Name>
 
-        <mybatisplus.version>3.2.0</mybatisplus.version>
     </properties>
 
     <dependencies>
@@ -32,12 +31,6 @@
             <groupId>world.xuewei</groupId>
             <artifactId>xw-fast-web</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatisplus.version}</version>
         </dependency>
 
     </dependencies>

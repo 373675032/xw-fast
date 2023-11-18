@@ -4,7 +4,7 @@
     <parent>
         <groupId>world.xuewei</groupId>
         <artifactId>xw-fast-parent</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.6</version>
     </parent>
 
     <artifactId>xw-fast-web</artifactId>

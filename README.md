@@ -66,7 +66,7 @@ XwFast
 <dependency>
     <groupId>world.xuewei</groupId>
     <artifactId>xw-fast-all</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
@@ -77,7 +77,7 @@ XwFast
 
 ## 📝文档
 
-[前往查看官方示例 xw-fast-demo](https://github.com/373675032/xw-fast-demo) 
+[前往查看官方示例 xw-fast-demo](https://github.com/373675032/xw-fast-demo)
 
 ### 快速开始
 
@@ -128,7 +128,7 @@ XwFast
     <dependency>
         <groupId>world.xuewei</groupId>
         <artifactId>xw-fast-all</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.6</version>
     </dependency>
 
 </dependencies>
