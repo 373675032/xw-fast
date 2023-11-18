@@ -1,5 +1,6 @@
 package world.xuewei.fast.crud.config;
 
+import cn.hutool.core.util.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -10,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo.BuilderConfiguration;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import world.xuewei.fast.core.util.Assert;
 import world.xuewei.fast.crud.annotation.FastController;
 import world.xuewei.fast.crud.controller.BaseController;
 import world.xuewei.fast.crud.service.BaseDBService;
@@ -56,17 +56,17 @@ public class FastControllerRegister implements ApplicationContextAware, WebMvcCo
             Class<?> fastClass = fastController.getClass();
             // 声明 FastController 注解的控制器必须指定 @RequestMapping 注解，否则接口路径冲突
             RequestMapping requestMappingAnnotation = fastClass.getAnnotation(RequestMapping.class);
-            if (Assert.isEmpty(requestMappingAnnotation)) {
+            if (ObjectUtil.isEmpty(requestMappingAnnotation)) {
                 log.warn("FastController Must Be Tagged With @RequestMapping. {} Fail To Register", beanName);
                 continue;
             }
             String[] basicUrls = requestMappingAnnotation.value();
-            if (Assert.isEmpty(basicUrls)) {
+            if (ObjectUtil.isEmpty(basicUrls)) {
                 log.warn("FastController @RequestMapping Url Must Be Specify. {} Fail To Register", beanName);
                 continue;
             }
             BaseDBService<Object> service = getService(fastClass, fastController);
-            if (Assert.isEmpty(service)) {
+            if (ObjectUtil.isEmpty(service)) {
                 // 声明 FastController 注解的控制器必须包含并注入 service 成员变量
                 log.warn("FastController Must Inject A Member Variable Named 'service'. {} Fail To Register", beanName);
                 continue;
@@ -75,7 +75,7 @@ public class FastControllerRegister implements ApplicationContextAware, WebMvcCo
             FastController classAnnotation = fastClass.getAnnotation(FastController.class);
             String[] includeMethods = classAnnotation.includeMethods();
             String[] excludeMethods = classAnnotation.excludeMethods();
-            if (Assert.notEmpty(includeMethods) && Assert.notEmpty(excludeMethods)) {
+            if (ObjectUtil.isNotEmpty(includeMethods) && ObjectUtil.isNotEmpty(excludeMethods)) {
                 // 使用 FastController 注解时，includeMethods 属性和 excludeMethods 属性不可同时指定
                 log.warn("FastController Cannot Configure Both 'includeMethods' and 'excludeMethods'. {} Fail To Register", beanName);
                 continue;
@@ -106,7 +106,7 @@ public class FastControllerRegister implements ApplicationContextAware, WebMvcCo
         List<String> includeList = Arrays.stream(includeMethods).collect(Collectors.toList());
         List<String> excludeList = Arrays.stream(excludeMethods).collect(Collectors.toList());
         List<Method> methodList = Arrays.stream(BaseController.class.getDeclaredMethods()).collect(Collectors.toList());
-        return Assert.notEmpty(includeMethods) ? includeRegister(includeList, methodList) : excludeRegister(excludeList, methodList);
+        return ObjectUtil.isNotEmpty(includeMethods) ? includeRegister(includeList, methodList) : excludeRegister(excludeList, methodList);
     }
 
     /**
@@ -205,6 +205,6 @@ public class FastControllerRegister implements ApplicationContextAware, WebMvcCo
             // 声明 FastController 注解的控制器必须包含并注入 service 成员变量
             return null;
         }
-        return Assert.notEmpty(serviceInstance) ? (BaseDBService) serviceInstance : null;
+        return ObjectUtil.isNotEmpty(serviceInstance) ? (BaseDBService) serviceInstance : null;
     }
 }

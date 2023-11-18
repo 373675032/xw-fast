@@ -1,11 +1,11 @@
 package world.xuewei.fast.crud.query;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import world.xuewei.fast.core.util.Assert;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ResultPage<T> extends QueryPage {
      * @param wrapperPage Mybatis Pulse分页信息
      */
     public ResultPage(IPage<T> wrapperPage) {
-        if (Assert.notEmpty(wrapperPage)) {
+        if (ObjectUtil.isNotEmpty(wrapperPage)) {
             this.pageNum = wrapperPage.getCurrent();
             this.pageSize = wrapperPage.getSize();
             this.totalPage = wrapperPage.getPages();

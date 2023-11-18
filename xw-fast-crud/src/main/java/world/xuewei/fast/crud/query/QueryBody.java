@@ -1,9 +1,9 @@
 package world.xuewei.fast.crud.query;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import lombok.AllArgsConstructor;
@@ -11,10 +11,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import world.xuewei.fast.core.exception.BusinessRunTimeException;
-import world.xuewei.fast.core.util.Assert;
 import world.xuewei.fast.core.util.VariableNameUtils;
 
-
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,13 +63,13 @@ public class QueryBody<T> {
      * 参数合法性检查
      */
     public void check() {
-        if (Assert.notEmpty(keyword) && Assert.isEmpty(keywordFields)) {
+        if (ObjectUtil.isNotEmpty(keyword) && ObjectUtil.isEmpty(keywordFields)) {
             throw new BusinessRunTimeException("关键词查询时必须指定 keywordFields，且必须指定为字符类型字段");
         }
-        if (Assert.notEmpty(conditions)) {
+        if (ObjectUtil.isNotEmpty(conditions)) {
             conditions.forEach(QueryCondition::check);
         }
-        if (Assert.notEmpty(orderBy)) {
+        if (ObjectUtil.isNotEmpty(orderBy)) {
             orderBy.forEach(QueryOrder::check);
         }
     }
@@ -83,7 +82,7 @@ public class QueryBody<T> {
     public QueryWrapper<T> buildWrapper() {
         QueryWrapper<T> wrapper = new QueryWrapper<>();
         // 关键词
-        if (Assert.notEmpty(keywordFields) && Assert.notEmpty(keyword)) {
+        if (ObjectUtil.isNotEmpty(keywordFields) && ObjectUtil.isNotEmpty(keyword)) {
             wrapper.and(orWrapper -> {
                 for (String keywordField : keywordFields) {
                     orWrapper.like(VariableNameUtils.humpToLine(keywordField), keyword).or();
@@ -91,12 +90,12 @@ public class QueryBody<T> {
             });
         }
         // 指定查询字段
-        if (Assert.notEmpty(includeFields)) {
+        if (ObjectUtil.isNotEmpty(includeFields)) {
             String[] array = includeFields.stream().map(VariableNameUtils::humpToLine).collect(Collectors.toList()).toArray(new String[]{});
             wrapper.select(array);
         }
         // 查询条件
-        if (Assert.notEmpty(conditions)) {
+        if (ObjectUtil.isNotEmpty(conditions)) {
             for (QueryCondition condition : conditions) {
                 String field = VariableNameUtils.humpToLine(condition.getField());
                 String type = condition.getType();
@@ -144,14 +143,14 @@ public class QueryBody<T> {
                     case "in": // 字段 IN (value.get(0), value.get(1), ...)
                         try {
                             wrapper.in(field, parseValue2List(value).toArray());
-                        } catch (JsonProcessingException e) {
+                        } catch (IOException e) {
                             throw new BusinessRunTimeException("in 操作的值必须为数组");
                         }
                         break;
                     case "notIn": // 字段 NOT IN (value.get(0), value.get(1), ...)
                         try {
                             wrapper.notIn(field, parseValue2List(value).toArray());
-                        } catch (JsonProcessingException e) {
+                        } catch (IOException e) {
                             throw new BusinessRunTimeException("notIn 操作的值必须为数组");
                         }
                         break;
@@ -162,7 +161,7 @@ public class QueryBody<T> {
                                 throw new BusinessRunTimeException("between 操作的值必须为数组且长度为 2");
                             }
                             wrapper.between(field, betweenList.get(0), betweenList.get(1));
-                        } catch (JsonProcessingException e) {
+                        } catch (IOException e) {
                             throw new BusinessRunTimeException("between 操作的值必须为数组且长度为 2");
                         }
                         break;
@@ -173,7 +172,7 @@ public class QueryBody<T> {
                                 throw new BusinessRunTimeException("notBetween 操作的值必须为数组且长度为 2");
                             }
                             wrapper.notBetween(field, betweenList.get(0), betweenList.get(1));
-                        } catch (JsonProcessingException e) {
+                        } catch (IOException e) {
                             throw new BusinessRunTimeException("notBetween 操作的值必须为数组且长度为 2");
                         }
                         break;
@@ -183,7 +182,7 @@ public class QueryBody<T> {
             }
         }
         // 排序
-        if (Assert.notEmpty(orderBy)) {
+        if (ObjectUtil.isNotEmpty(orderBy)) {
             for (QueryOrder queryOrder : orderBy) {
                 String field = VariableNameUtils.humpToLine(queryOrder.getField());
                 String type = queryOrder.getType().toLowerCase();
@@ -208,10 +207,10 @@ public class QueryBody<T> {
      * @return IPage
      */
     public IPage<T> buildPage() {
-        if (Assert.isEmpty(pageBy) || (Assert.isEmpty(pageBy.getPageNum()) && Assert.isEmpty(pageBy.getPageSize()))) {
+        if (ObjectUtil.isEmpty(pageBy) || (ObjectUtil.isEmpty(pageBy.getPageNum()) && ObjectUtil.isEmpty(pageBy.getPageSize()))) {
             return null;
         }
-        if (Assert.isEmpty(pageBy.getPageNum()) || Assert.isEmpty(pageBy.getPageSize())) {
+        if (ObjectUtil.isEmpty(pageBy.getPageNum()) || ObjectUtil.isEmpty(pageBy.getPageSize())) {
             throw new BusinessRunTimeException("pageNum 与 pageSize 必须同时指定");
         }
         return new Page<>(pageBy.getPageNum(), pageBy.getPageSize());
@@ -222,9 +221,9 @@ public class QueryBody<T> {
      *
      * @param value 对象
      * @return List
-     * @throws JsonProcessingException JSON 解析异常
+     * @throws IOException JSON 解析异常
      */
-    private List<Object> parseValue2List(Object value) throws JsonProcessingException {
+    private List<Object> parseValue2List(Object value) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, Object.class);
         return objectMapper.readValue(String.valueOf(value), listType);

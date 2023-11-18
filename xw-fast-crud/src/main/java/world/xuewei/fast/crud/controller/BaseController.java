@@ -1,13 +1,15 @@
 package world.xuewei.fast.crud.controller;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.jdbc.BadSqlGrammarException;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import world.xuewei.fast.core.exception.BusinessRunTimeException;
-import world.xuewei.fast.core.util.Assert;
+import world.xuewei.fast.core.exception.ParamEmptyException;
 import world.xuewei.fast.crud.dto.request.ReqBody;
 import world.xuewei.fast.crud.query.QueryBody;
 import world.xuewei.fast.crud.query.ResultPage;
@@ -37,13 +39,11 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 实体对象
      */
-    @RequestMapping("/saveData")
+    @PostMapping("/saveData")
     @ResponseBody
     public RespResult saveData(@RequestBody ReqBody<T> reqBody) {
-        T t = reqBody.getObj();
-        Assert.assertNotEmpty(t, "实体[obj]");
-        T obj = baseService.saveData(t);
-        return RespResult.success("新增成功", obj);
+        T obj = Assert.notNull(reqBody.getObj(), () -> ParamEmptyException.build("实体[obj]"));
+        return RespResult.success("新增成功", baseService.saveData(obj));
     }
 
     /**
@@ -52,13 +52,11 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 实体对象列表
      */
-    @RequestMapping("/saveBatchData")
+    @PostMapping("/saveBatchData")
     @ResponseBody
     public RespResult saveBatchData(@RequestBody ReqBody<T> reqBody) {
-        List<T> objs = reqBody.getObjs();
-        Assert.assertNotEmpty(objs, "实体数组[objs]");
-        List<T> tList = baseService.saveBatchData(objs);
-        return RespResult.success("新增成功", tList);
+        List<T> objs = Assert.notEmpty(reqBody.getObjs(), () -> ParamEmptyException.build("实体数组[objs]"));
+        return RespResult.success("新增成功", baseService.saveBatchData(objs));
     }
 
     /**
@@ -67,17 +65,12 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 删除条数
      */
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     @ResponseBody
     public RespResult delete(@RequestBody ReqBody<T> reqBody) {
-        Assert.assertNotEmpty(reqBody, "ID[id]");
-        Serializable id = reqBody.getId();
-        Assert.assertNotEmpty(id, "ID[id]");
+        Serializable id = Assert.notNull(reqBody.getId(), () -> ParamEmptyException.build("ID[id]"));
         int deleted = baseService.delete(id);
-        if (deleted == 0) {
-            return RespResult.notFound("目标");
-        }
-        return RespResult.success("删除成功", deleted);
+        return deleted == 0 ? RespResult.notFound("目标") : RespResult.success("删除成功", deleted);
     }
 
     /**
@@ -86,17 +79,12 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 删除条数
      */
-    @RequestMapping("/deleteBatch")
+    @PostMapping("/deleteBatch")
     @ResponseBody
     public RespResult deleteBatch(@RequestBody ReqBody<T> reqBody) {
-        Assert.assertNotEmpty(reqBody, "ID数组[ids]");
-        List<Serializable> ids = reqBody.getIds();
-        Assert.assertNotEmpty(ids, "ID数组[ids]");
+        List<Serializable> ids = Assert.notEmpty(reqBody.getIds(), () -> ParamEmptyException.build("ID数组[ids]"));
         int deleted = baseService.deleteBatch(ids);
-        if (deleted == 0) {
-            return RespResult.notFound("目标");
-        }
-        return RespResult.success("删除成功", deleted);
+        return deleted == 0 ? RespResult.notFound("目标") : RespResult.success("删除成功", deleted);
     }
 
     /**
@@ -105,18 +93,13 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 删除条数
      */
-    @RequestMapping("/deleteByField")
+    @PostMapping("/deleteByField")
     @ResponseBody
     public RespResult deleteByField(@RequestBody ReqBody<T> reqBody) {
-        String field = reqBody.getField();
-        Object value = reqBody.getValue();
-        Assert.assertNotEmpty(field, "字段[field]");
-        Assert.assertNotEmpty(value, "值[value]");
+        String field = Assert.notNull(reqBody.getField(), () -> ParamEmptyException.build("字段[field]"));
+        Object value = Assert.notNull(reqBody.getValue(), () -> ParamEmptyException.build("值[value]"));
         int deleted = baseService.deleteByField(field, value);
-        if (deleted == 0) {
-            return RespResult.notFound("目标");
-        }
-        return RespResult.success("删除成功", deleted);
+        return deleted == 0 ? RespResult.notFound("目标") : RespResult.success("删除成功", deleted);
     }
 
     /**
@@ -125,18 +108,13 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/deleteBatchByField")
+    @PostMapping("/deleteBatchByField")
     @ResponseBody
     public RespResult deleteBatchByField(@RequestBody ReqBody<T> reqBody) {
-        String field = reqBody.getField();
-        List<Object> values = reqBody.getValues();
-        Assert.assertNotEmpty(field, "字段[field]");
-        Assert.assertNotEmpty(values, "值数组[values]");
+        String field = Assert.notNull(reqBody.getField(), () -> ParamEmptyException.build("字段[field]"));
+        List<Object> values = Assert.notEmpty(reqBody.getValues(), () -> ParamEmptyException.build("值数组[values]"));
         int deleted = baseService.deleteBatchByField(field, values);
-        if (deleted == 0) {
-            return RespResult.notFound("目标");
-        }
-        return RespResult.success("删除成功", deleted);
+        return deleted == 0 ? RespResult.notFound("目标") : RespResult.success("删除成功", deleted);
     }
 
     /**
@@ -145,16 +123,12 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/getById")
+    @PostMapping("/getById")
     @ResponseBody
     public RespResult getById(@RequestBody ReqBody<T> reqBody) {
-        Serializable id = reqBody.getId();
-        Assert.assertNotEmpty(id, "ID[id]");
+        Serializable id = Assert.notNull(reqBody.getId(), () -> ParamEmptyException.build("ID[id]"));
         T t = baseService.getById(id);
-        if (Assert.isEmpty(t)) {
-            return RespResult.notFound("目标");
-        }
-        return RespResult.success("查询成功", t);
+        return ObjectUtil.isEmpty(t) ? RespResult.notFound("目标") : RespResult.success("查询成功", t);
     }
 
     /**
@@ -163,13 +137,11 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/getByIds")
+    @PostMapping("/getByIds")
     @ResponseBody
     public RespResult getByIds(@RequestBody ReqBody<T> reqBody) {
-        List<Serializable> ids = reqBody.getIds();
-        Assert.assertNotEmpty(ids, "ID数组[ids]");
-        List<T> list = baseService.getByIds(ids);
-        return RespResult.success("查询成功", list);
+        List<Serializable> ids = Assert.notEmpty(reqBody.getIds(), () -> ParamEmptyException.build("ID数组[ids]"));
+        return RespResult.success("查询成功", baseService.getByIds(ids));
     }
 
     /**
@@ -178,13 +150,11 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/getByObj")
+    @PostMapping("/getByObj")
     @ResponseBody
     public RespResult getByObj(@RequestBody ReqBody<T> reqBody) {
-        T obj = reqBody.getObj();
-        Assert.assertNotEmpty(obj, "实体[obj]");
-        List<T> list = baseService.getByObj(obj);
-        return RespResult.success("查询成功", list);
+        T obj = Assert.notNull(reqBody.getObj(), () -> ParamEmptyException.build("实体[obj]"));
+        return RespResult.success("查询成功", baseService.getByObj(obj));
     }
 
     /**
@@ -193,15 +163,12 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/getByField")
+    @PostMapping("/getByField")
     @ResponseBody
     public RespResult getByField(@RequestBody ReqBody<T> reqBody) {
-        String field = reqBody.getField();
-        Object value = reqBody.getValue();
-        Assert.assertNotEmpty(field, "字段[field]");
-        Assert.assertNotEmpty(value, "值[value]");
-        List<T> list = baseService.getByField(field, value);
-        return RespResult.success("查询成功", list);
+        String field = Assert.notNull(reqBody.getField(), () -> ParamEmptyException.build("字段[field]"));
+        Object value = Assert.notNull(reqBody.getValue(), () -> ParamEmptyException.build("值[value]"));
+        return RespResult.success("查询成功", baseService.getByField(field, value));
     }
 
     /**
@@ -210,15 +177,12 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/getBatchByField")
+    @PostMapping("/getBatchByField")
     @ResponseBody
     public RespResult getBatchByField(@RequestBody ReqBody<T> reqBody) {
-        String field = reqBody.getField();
-        List<Object> values = reqBody.getValues();
-        Assert.assertNotEmpty(field, "字段[field]");
-        Assert.assertNotEmpty(values, "值数组[values]");
-        List<T> list = baseService.getBatchByField(field, values);
-        return RespResult.success("查询成功", list);
+        String field = Assert.notNull(reqBody.getField(), () -> ParamEmptyException.build("字段[field]"));
+        List<Object> values = Assert.notEmpty(reqBody.getValues(), () -> ParamEmptyException.build("值数组[values]"));
+        return RespResult.success("查询成功", baseService.getBatchByField(field, values));
     }
 
     /**
@@ -226,11 +190,10 @@ public class BaseController<T> {
      *
      * @return 出参
      */
-    @RequestMapping("/getAll")
+    @PostMapping("/getAll")
     @ResponseBody
     public RespResult getAll() {
-        List<T> list = baseService.getAll();
-        return RespResult.success("查询成功", list);
+        return RespResult.success("查询成功", baseService.getAll());
     }
 
     /**
@@ -239,17 +202,16 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/customQuery")
+    @PostMapping("/customQuery")
     @ResponseBody
     public RespResult customQuery(@RequestBody ReqBody<T> reqBody) {
-        QueryBody<T> queryBody = reqBody.getQueryBody();
-        Assert.assertNotEmpty(queryBody, "查询策略[queryBody]");
+        QueryBody<T> queryBody = Assert.notNull(reqBody.getQueryBody(), () -> ParamEmptyException.build("查询策略[queryBody]"));
         // 参数合法性检查
         queryBody.check();
         QueryWrapper<T> queryWrapper = queryBody.buildWrapper();
         IPage<T> page = queryBody.buildPage();
         try {
-            if (Assert.notEmpty(page)) {
+            if (ObjectUtil.isNotEmpty(page)) {
                 IPage<T> wrapperPage = baseService.getByWrapperPage(queryWrapper, page);
                 ResultPage<T> resultPage = new ResultPage<>(wrapperPage);
                 return RespResult.success("查询成功", resultPage);
@@ -268,13 +230,11 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/countByObj")
+    @PostMapping("/countByObj")
     @ResponseBody
     public RespResult countByObj(@RequestBody ReqBody<T> reqBody) {
-        T obj = reqBody.getObj();
-        Assert.assertNotEmpty(obj, "实体[obj]");
-        int count = baseService.countByObj(obj);
-        return RespResult.success("查询成功", count);
+        T obj = Assert.notNull(reqBody.getObj(), () -> ParamEmptyException.build("实体[obj]"));
+        return RespResult.success("查询成功", baseService.countByObj(obj));
     }
 
     /**
@@ -283,14 +243,11 @@ public class BaseController<T> {
      * @param reqBody 通用请求体
      * @return 出参
      */
-    @RequestMapping("/countByField")
+    @PostMapping("/countByField")
     @ResponseBody
     public RespResult countByField(@RequestBody ReqBody<T> reqBody) {
-        String field = reqBody.getField();
-        Object value = reqBody.getValue();
-        Assert.assertNotEmpty(field, "字段[field]");
-        Assert.assertNotEmpty(value, "值[value]");
-        int count = baseService.countByField(field, value);
-        return RespResult.success("查询成功", count);
+        String field = Assert.notNull(reqBody.getField(), () -> ParamEmptyException.build("字段[field]"));
+        Object value = Assert.notNull(reqBody.getValue(), () -> ParamEmptyException.build("值[value]"));
+        return RespResult.success("查询成功", baseService.countByField(field, value));
     }
 }

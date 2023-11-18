@@ -1,10 +1,10 @@
 package world.xuewei.fast.web.dto.response;
 
+import cn.hutool.core.util.ObjectUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import world.xuewei.fast.core.util.Assert;
 
 /**
  * 接口相应结果
@@ -168,7 +168,7 @@ public class RespResult {
      * 请求是否成功并有数据返回
      */
     public boolean yesSuccessWithDateResp() {
-        return "SUCCESS".equals(code) && Assert.notEmpty(data);
+        return "SUCCESS".equals(code) && ObjectUtil.isNotEmpty(data);
     }
 
     /**

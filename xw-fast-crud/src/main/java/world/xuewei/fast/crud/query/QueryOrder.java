@@ -1,11 +1,11 @@
 package world.xuewei.fast.crud.query;
 
+import cn.hutool.core.util.ObjectUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import world.xuewei.fast.core.exception.BusinessRunTimeException;
-import world.xuewei.fast.core.util.Assert;
 
 /**
  * 排序信息
@@ -33,7 +33,7 @@ public class QueryOrder {
      * 参数合法性检查
      */
     public void check() {
-        if (Assert.isEmpty(field) || Assert.isEmpty(type)) {
+        if (ObjectUtil.isEmpty(field) || ObjectUtil.isEmpty(type)) {
             throw new BusinessRunTimeException("QueryOrder 中 field、type 均不可为空");
         }
     }

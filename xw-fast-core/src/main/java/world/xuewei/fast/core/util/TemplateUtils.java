@@ -1,5 +1,6 @@
 package world.xuewei.fast.core.util;
 
+import cn.hutool.core.lang.Assert;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -33,11 +34,7 @@ public class TemplateUtils {
         } catch (IOException e) {
             // 尝试获取默认模板
             String content = DEFAULT_TEMPLATES.get(fileName);
-            if (Assert.notEmpty(content)) {
-                return content;
-            }
-            // 处理异常
-            throw new RuntimeException(e.getMessage());
+            return Assert.notEmpty(content, () -> new RuntimeException(e.getMessage()));
         }
         return stringBuilder.toString();
     }

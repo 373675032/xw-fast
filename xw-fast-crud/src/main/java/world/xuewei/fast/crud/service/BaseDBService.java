@@ -1,13 +1,13 @@
 package world.xuewei.fast.crud.service;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
-import world.xuewei.fast.core.util.Assert;
-import world.xuewei.fast.core.util.BeanUtils;
 import world.xuewei.fast.core.util.VariableNameUtils;
 
 import java.io.Serializable;
@@ -158,10 +158,10 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
 
     @Override
     public List<T> getByObj(T obj) {
-        if (Assert.isEmpty(obj)) {
+        if (ObjectUtil.isEmpty(obj)) {
             return getAll();
         }
-        Map<String, Object> bean2Map = BeanUtils.beanToMap(obj);
+        Map<String, Object> bean2Map = BeanUtil.beanToMap(obj);
         return getByMap(bean2Map);
     }
 
@@ -169,7 +169,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
     public List<T> getByMap(Map<String, Object> map) {
         Map<String, Object> newMap = new HashMap<>();
         for (String key : map.keySet()) {
-            if (Assert.isEmpty(map.get(key))) {
+            if (ObjectUtil.isEmpty(map.get(key))) {
                 continue;
             }
             newMap.put(VariableNameUtils.humpToLine(key), map.get(key));
@@ -194,7 +194,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
 
     @Override
     public int countByObj(T obj) {
-        return this.countByMap(BeanUtils.beanToMap(obj));
+        return this.countByMap(BeanUtil.beanToMap(obj));
     }
 
     @Override
@@ -209,7 +209,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
 
     @Override
     public IPage<T> getByObjPage(T obj, IPage<T> page) {
-        return this.getByMapPage(BeanUtils.beanToMap(obj), page);
+        return this.getByMapPage(BeanUtil.beanToMap(obj), page);
     }
 
     @Override
@@ -227,7 +227,7 @@ public class BaseDBService<T> extends ServiceImpl<BaseMapper<T>, T> implements B
         QueryWrapper<T> wrapper = new QueryWrapper<>();
         for (Map.Entry<String, Object> temp : map.entrySet()) {
             String key = temp.getKey();
-            if (Assert.isEmpty(temp.getValue())) {
+            if (ObjectUtil.isEmpty(temp.getValue())) {
                 continue;
             }
             wrapper.eq(VariableNameUtils.humpToLine(key), map.get(key));

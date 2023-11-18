@@ -22,6 +22,10 @@ public class ParamEmptyException extends BusinessRunTimeException {
         this.message = message;
     }
 
+    public static ParamEmptyException build(String param) {
+        throw new ParamEmptyException("参数<" + param + ">为空");
+    }
+
     /**
      * 设置原因
      *
